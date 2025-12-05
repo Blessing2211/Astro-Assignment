@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 let songList = [
-    { title: "Heavenly Peace by Don Meon", artist: "Don Meon", album: "Divine Melodies", duration: "3:45" },
+    { title: "Heavenly Peace", artist: "Don Meon", album: "Divine Melodies", duration: "3:45" },
     { title: "Soulful Journey", artist: "Don Meon", album: "Spiritual Vibes", duration: "4:20" },
     { title: "Eternal Light", artist: "Don Meon", album: "Celestial Tunes", duration: "5:10" },
 ];
@@ -9,30 +9,32 @@ let songList = [
 
 <Layout title="Enjoy soul lifting songs from Don Meon">
    
-   <section class="main">
-        <h1>Playlist</h1>
+   <section class="main2">
+
+    <h1>Playlist</h1>
 
     <ul id="playlist">
-        {songList.map((song) => (
-            <li>
-                <strong>{song.title}</strong> by {song.artist} from the album <em>{song.album}</em> - {song.duration}
-            </li>
-        ))}
+    {songList.map((song) => (
+        <li>
+            <strong>{song.title}</strong> by {song.artist} from the album
+            <em>{song.album}</em> - {song.duration}
+        </li>
+    ))}
     </ul>
+
     <button id="shuffleBtn">Shuffle songs</button>
 
-    <div>
+<!-- Add Song Form -->
+<form id="add-song-form">
+    <input type="text" id="new-song-title" placeholder="Add a new song title" required />
+    <button type="submit">Add Song</button>
+</form>
 
-        <!--Form for adding songs -->
-    <form id="add-song-form">
-        <input type="text" id="new-song-title" placeholder= "Add a new song title" required />
-        <button type="submit">Add Song</button>   
-        </form>
     </div>
     </section>
         
 <script>
-    // Convert Astro's songList into a JS array on the client
+    // Convert initial playlist to array of <li> elements
     const items = Array.from(document.querySelectorAll("#playlist li"));
 
     function shuffleArray(array) {
@@ -42,15 +44,39 @@ let songList = [
         }
     }
 
+    // SHUFFLE BUTTON
     document.getElementById("shuffleBtn").addEventListener("click", () => {
         const list = document.getElementById("playlist");
-
-        // Shuffle the <li> elements
         shuffleArray(items);
-
-        // Clear & re-append in new order
         list.innerHTML = "";
         items.forEach((item) => list.appendChild(item));
+    });
+
+    // ADD NEW SONG
+    const form = document.getElementById("add-song-form");
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault(); // prevent page reload
+
+        const input = document.getElementById("new-song-title");
+        const newSongTitle = input.value.trim();
+
+        if (newSongTitle !== "") {
+            const list = document.getElementById("playlist");
+
+            // Create <li> for new song
+            const li = document.createElement("li");
+            li.textContent = newSongTitle;
+
+            // Add to displayed list
+            list.appendChild(li);
+
+            // Also add to array so shuffle still works
+            items.push(li);
+
+            // Clear input
+            input.value = "";
+        }
     });
 </script>
 </Layout>
