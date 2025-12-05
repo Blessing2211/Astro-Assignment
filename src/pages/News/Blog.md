@@ -1,6 +1,6 @@
 ---
 author: "Blessing Ijeoma Ezeja"
-layout: ../../Layouts/Bloglayout.astro
+layout: ../../layouts/Layout.astro
 ---
 <div class="blogPost">
 
