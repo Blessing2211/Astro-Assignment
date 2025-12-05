@@ -1,0 +1,33 @@
+---
+const {title}= Astro.props;
+import '../styles.css';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Favorite Artist</title>
+	</head>
+	<body>
+		<header>
+			 <nav class="navigation">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/news">News</a></li>
+                    <li><a href="/playlist">Playlist</a></li>
+                </ul>
+            </nav>
+		</header>
+		<slot />
+
+		<footer>
+			<p>&copy; 2025 Don Meon Page. All rights reserved.</p>
+		</footer>
+	</body>
+</html>
+

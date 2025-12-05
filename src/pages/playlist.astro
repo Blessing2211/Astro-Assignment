@@ -1,0 +1,56 @@
+---
+import Layout from '../layouts/Layout.astro';
+let songList = [
+    { title: "Heavenly Peace by Don Meon", artist: "Don Meon", album: "Divine Melodies", duration: "3:45" },
+    { title: "Soulful Journey", artist: "Don Meon", album: "Spiritual Vibes", duration: "4:20" },
+    { title: "Eternal Light", artist: "Don Meon", album: "Celestial Tunes", duration: "5:10" },
+];
+---
+
+<Layout title="Enjoy soul lifting songs from Don Meon">
+   
+   <section class="main">
+        <h1>Playlist</h1>
+
+    <ul id="playlist">
+        {songList.map((song) => (
+            <li>
+                <strong>{song.title}</strong> by {song.artist} from the album <em>{song.album}</em> - {song.duration}
+            </li>
+        ))}
+    </ul>
+    <button id="shuffleBtn">Shuffle songs</button>
+
+    <div>
+
+        <!--Form for adding songs -->
+    <form id="add-song-form">
+        <input type="text" id="new-song-title" placeholder= "Add a new song title" required />
+        <button type="submit">Add Song</button>   
+        </form>
+    </div>
+    </section>
+        
+<script>
+    // Convert Astro's songList into a JS array on the client
+    const items = Array.from(document.querySelectorAll("#playlist li"));
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    document.getElementById("shuffleBtn").addEventListener("click", () => {
+        const list = document.getElementById("playlist");
+
+        // Shuffle the <li> elements
+        shuffleArray(items);
+
+        // Clear & re-append in new order
+        list.innerHTML = "";
+        items.forEach((item) => list.appendChild(item));
+    });
+</script>
+</Layout>

@@ -1,0 +1,33 @@
+---
+import { getCollection, getEntries } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="News">
+    <section class="main2">
+        <div>
+        <h1>Welcome to Don Meon's Music Artist Page</h1>
+        <img src="../public/images/DonMeon.png" alt="Don Meon" />
+        <h2>Relax and get to know about my favorite artist, Don Meon</h2>
+        </div>
+
+        <div class="Blogs">
+            <h1>Blogs</h1>
+            <ul>
+                <li><a href="/News/news-1">New Christmas Gospel Song Alert</a></li>
+                <li><a href="/News/news-2">Christmas Season Tour with Don Meon</a></li>
+                <li><a href="/News/news-3">Learn About Don Meon's Ministry</a></li>
+            </ul>
+        </div>
+    </section>
+</Layout>
+<style>
+    .main2{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    gap: 50px;
+    width: 100%;
+    padding: 3%;
+    }
